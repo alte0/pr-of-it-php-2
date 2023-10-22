@@ -4,7 +4,7 @@ services:
   php-service:
 #    image: php:8.2.9-cli
     build: ./.docker/php
-    container_name: php_cn
+    container_name: php_cn${PROJECT_NAME}
     volumes:
       - './1/:/app'
       - './.docker/php/xdebug.ini:/usr/local/etc/php/xdebug.ini'
@@ -24,7 +24,7 @@ services:
   mysql-service:
 #    build: ./.docker/db
     image: mysql:8.0.34
-    container_name: mysql_cn
+    container_name: mysql_cn${PROJECT_NAME}
     restart: unless-stopped
     ports:
       - '5432:3306'
@@ -44,10 +44,10 @@ services:
 
 networks:
   internet:
-    name: internet
+    name: internet${PROJECT_NAME}
     driver: bridge
   localnet:
-    name: localnet
+    name: localnet${PROJECT_NAME}
     driver: bridge
 #    ipam:
 #      driver: default
