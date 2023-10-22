@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  php-service:
+#    image: php:8.2.9-cli
+    build: ./.docker/php
+    container_name: php_cn
+    volumes:
+      - './1/:/app'
+      - './.docker/php/xdebug.ini:/usr/local/etc/php/xdebug.ini'
+#    environment:
+#      - 'TEST_VAR_PHP=test_var'
+    ports:
+      - '9999:8080'
+
+    restart: unless-stopped
+    networks:
+      - internet
+      - localnet
+    working_dir: /app
+    depends_on:
+      - mysql-service
+
+  mysql-service:
+#    build: ./.docker/db
+    image: mysql:8.0.34
+    container_name: mysql_cn
+    restart: unless-stopped
+    ports:
+      - '5432:3306'
+    environment:
+#      MYSQL_USER: admin
+#      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+#      MYSQL_DATABASE: personal_site
+    networks:
+      - localnet
+    volumes:
+      - ./.docker/volume/db:/var/lib/mysql
+    expose:
+      - 3306
+      - 33060
+
+networks:
+  internet:
+    name: internet
+    driver: bridge
+  localnet:
+    name: localnet
+    driver: bridge
+#    ipam:
+#      driver: default
+#      config:
+#        - subnet: 192.168.220.0/20
