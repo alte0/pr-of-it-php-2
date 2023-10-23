@@ -18,8 +18,8 @@
                 <img src="https://placehold.co/100x100" alt="" width="100" height="100">
             </div>
             <div class="flex-grow-1 ms-md-3">
-                <h3><?= $article->title; ?></h3>
-                <p class="mb-0"><?= $article->content; ?></p>
+                <h3><?php echo $article->title; ?></h3>
+                <p class="mb-0"><?php echo $article->content; ?></p>
             </div>
         </div>
     </div>

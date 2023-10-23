@@ -22,9 +22,9 @@
             </div>
             <div class="flex-grow-1 ms-md-3">
                 <h3>
-                    <a href="/article.php?id=<?= $article->id ?>"><?= $article->title; ?></a>
+                    <a href="/article.php?id=<?php echo $article->id ?>"><?php echo $article->title; ?></a>
                 </h3>
-                <p class="mb-0"><?= $article->content; ?></p>
+                <p class="mb-0"><?php echo $article->content; ?></p>
             </div>
         </div>
         <?php
