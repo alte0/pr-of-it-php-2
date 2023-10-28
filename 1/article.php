@@ -3,7 +3,7 @@
 require_once __DIR__ . '/autoload.php';
 
 $id = 0;
-if ($_GET['id'] > 0) {
+if (isset($_GET['id']) && $_GET['id'] > 0) {
     $id = intval($_GET['id']);
 }
 
