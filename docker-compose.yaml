@@ -6,7 +6,7 @@ services:
     build: ./.docker/php
     container_name: php_cn${PROJECT_NAME}
     volumes:
-      - './2/:/app'
+      - './3/:/app'
       - './.docker/php/xdebug.ini:/usr/local/etc/php/xdebug.ini'
 #    environment:
 #      - 'TEST_VAR_PHP=test_var'
@@ -26,6 +26,8 @@ services:
     image: mysql:8.0.34
     container_name: mysql_cn${PROJECT_NAME}
     restart: unless-stopped
+    command: 
+      --lower_case_table_names=1
     ports:
       - '5432:3306'
     environment:
@@ -33,11 +35,12 @@ services:
 #      MYSQL_PASSWORD: admin
       MYSQL_ROOT_PASSWORD: ''
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_ROOT_HOST: '%'
 #      MYSQL_DATABASE: personal_site
     networks:
       - localnet
     volumes:
-      - ./.docker/volume/db:/var/lib/mysql
+      - '/.docker/volume/db:/var/lib/mysql'
     expose:
       - 3306
       - 33060
