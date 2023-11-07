@@ -131,7 +131,7 @@ abstract class Model
     protected function getObjectVars(array $arrExcludeVars = []): array
     {
         $varsObject = get_object_vars($this);
-        var_dump($varsObject);
+        
         if (empty($arrExcludeVars)) {
             return $varsObject;
         }

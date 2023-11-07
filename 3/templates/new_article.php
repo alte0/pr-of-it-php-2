@@ -22,6 +22,14 @@
                     placeholder="Текст новости"
             ><?php echo $this->content; ?></textarea>
         </div>
+        <div class="mb-3">
+            <label for="exampleFormControlSelect1" class="form-label">Автор новости</label>
+            <select name="article[author]" class="form-select" id="exampleFormControlSelect1">
+            <?php foreach ($this->autors as $author) { ?>
+                <option value="<?php echo $author->id; ?>"><?php echo $author->fio; ?></option>
+            <?php } ?>
+            </select>
+        </div>
         <div>
             <button
                     class="btn btn-danger"
