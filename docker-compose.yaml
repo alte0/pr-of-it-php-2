@@ -6,7 +6,7 @@ services:
     build: ./.docker/php
     container_name: php_cn${PROJECT_NAME}
     volumes:
-      - './3/:/app'
+      - './4/:/app'
       - './.docker/php/xdebug.ini:/usr/local/etc/php/xdebug.ini'
 #    environment:
 #      - 'TEST_VAR_PHP=test_var'
