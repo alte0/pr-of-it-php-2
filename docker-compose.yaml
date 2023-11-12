@@ -40,7 +40,7 @@ services:
     networks:
       - localnet
     volumes:
-      - '/.docker/volume/db:/var/lib/mysql'
+      - '/tmp/dc-volume/db:/var/lib/mysql'
     expose:
       - 3306
       - 33060

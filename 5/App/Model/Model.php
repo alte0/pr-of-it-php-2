@@ -179,7 +179,7 @@ abstract class Model
             }
 
             if ($isError) {
-                $textError = $field['errorText'];
+                $textError = $field['errorText'] . ' "' . $field['name'] . '"';
             }
             
             if ($isError) {
