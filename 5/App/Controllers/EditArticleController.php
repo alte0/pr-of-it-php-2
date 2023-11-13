@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class EditArticleController extends AbstractController
 {
-    protected function action():void
+    protected function action(): void
     {
         $id = 0;
 

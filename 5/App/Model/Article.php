@@ -8,7 +8,7 @@ class Article extends Model
     public string $title;
     public string $content;
     public int $author_id;
-    
+
     public static function getValidateFields(string $typeValidate): array
     {
         $validateFields = [
@@ -54,11 +54,11 @@ class Article extends Model
                 ],
             ],
         ];
-        
+
         if (!empty($typeValidate) && isset($validateFields[$typeValidate])) {
             return $validateFields[$typeValidate];
         }
-        
+
         throw new App\Exception\NotFoundException('Нет правил валидации');
     }
 
@@ -98,7 +98,7 @@ class Article extends Model
         if ($name === 'author' && $this->author_id > 0) {
             return isset($this->author);
         }
-        
+
         return false;
     }
 }

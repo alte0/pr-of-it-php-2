@@ -25,14 +25,14 @@
         <div class="mb-3">
             <label for="exampleFormControlSelect1" class="form-label">Автор новости</label>
             <select name="article[author]" class="form-select" id="exampleFormControlSelect1">
-            <?php foreach ($this->autors as $author) { ?>
-                <option 
-                        value="<?php echo $author->id; ?>"
-                        <?php if (isset($this->author_id) && $this->author_id > 0 && $this->author_id == $author->id){ ?>
-                        selected
+                <?php foreach ($this->autors as $author) { ?>
+                    <option
+                            value="<?php echo $author->id; ?>"
+                        <?php if (isset($this->author_id) && $this->author_id > 0 && $this->author_id == $author->id) { ?>
+                            selected
                         <?php } ?>
-                ><?php echo $author->fio; ?></option>
-            <?php } ?>
+                    ><?php echo $author->fio; ?></option>
+                <?php } ?>
             </select>
         </div>
         <div>

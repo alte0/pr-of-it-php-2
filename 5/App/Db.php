@@ -16,7 +16,7 @@ class Db
                 throw new \App\Exception\DbException('Ошибка базы данных');
             }
         }
-        
+
     }
 
     public function query(string $sql, array $params = [], $class = \stdClass::class): false|array

@@ -131,7 +131,7 @@ abstract class Model
     protected function getObjectVars(array $arrExcludeVars = []): array
     {
         $varsObject = get_object_vars($this);
-        
+
         if (empty($arrExcludeVars)) {
             return $varsObject;
         }
@@ -153,7 +153,7 @@ abstract class Model
      * @param array $data - массив входных данных
      * @throws \App\Exception\ErrorsException
      */
-    public function fill(array $data, string $typeValidate):void
+    public function fill(array $data, string $typeValidate): void
     {
         $errors = new \App\Exception\ErrorsException();
         $validateFields = static::getValidateFields($typeValidate);
@@ -162,12 +162,11 @@ abstract class Model
             $errors->add(new \Exception('Ошибка валидации.'));
             throw $errors;
         }
-        
-        foreach ($validateFields as $keyField => $field)
-        {
+
+        foreach ($validateFields as $keyField => $field) {
             $isError = false;
             $textError = '';
-            
+
             if (isset($data[$keyField]) && ($curTypeField = gettype($data[$keyField])) === $field['type']) {
                 if ($curTypeField === 'string' && mb_strlen($data[$keyField]) <= 0) {
                     $isError = true;
@@ -181,7 +180,7 @@ abstract class Model
             if ($isError) {
                 $textError = $field['errorText'] . ' "' . $field['name'] . '"';
             }
-            
+
             if ($isError) {
                 $errors->add(new \Exception($textError));
             }
@@ -190,7 +189,7 @@ abstract class Model
         if (!$errors->empty()) {
             throw $errors;
         }
-        
+
         foreach ($data as $datumKey => $datum) {
             $this->$datumKey = $datum;
         }

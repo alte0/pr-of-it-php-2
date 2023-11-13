@@ -6,4 +6,4 @@ RUN pecl channel-update pecl.php.net && \
     pecl install xdebug && \
     docker-php-ext-enable xdebug
 WORKDIR /app
-CMD php -S 0.0.0.0:8080
+CMD php -S 0.0.0.0:8080 index.php

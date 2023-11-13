@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class DeleteArticleController extends AbstractController
 {
-    protected function action():void
+    protected function action(): void
     {
         if (
             $_SERVER['REQUEST_METHOD'] === 'POST' &&
@@ -17,16 +17,15 @@ class DeleteArticleController extends AbstractController
             );
 
             $article = new \App\Model\Article();
-            
+
             foreach ($arrArticlesDel as $id) {
-//                $article->id = $id;
-                $article->fill(['id' =>intval($id)], 'delete');
+                $article->fill(['id' => intval($id)], 'delete');
                 $article->delete();
             }
         }
-        
+
         $articles = \App\Model\Article::findAll();
-        
+
         if (is_array($articles)) {
             $templateName = 'del_article';
             $this->view->articles = $articles;

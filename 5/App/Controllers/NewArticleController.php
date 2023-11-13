@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class NewArticleController extends AbstractController
 {
-    protected function action():void
+    protected function action(): void
     {
         $templateName = 'new_article';
 
@@ -23,7 +23,7 @@ class NewArticleController extends AbstractController
             $article->save();
             $templateName = 'new_article_success';
         }
-        
+
         $title = 'Добавить новую новость';
         $this->view->h3 = $title;
         $this->view->textSubmit = 'Добавить новость';

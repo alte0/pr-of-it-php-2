@@ -8,15 +8,15 @@ class AbstractController
     protected \App\View $layoutView;
     protected string $action;
     protected bool $access;
-    
+
     public function __construct(bool $access)
     {
         $this->view = new \App\View();
         $this->layoutView = new \App\View();
-        
+
         $this->access = $access;
     }
-    
+
     public function dispatcher()
     {
         if (!$this->access()) {
@@ -25,11 +25,13 @@ class AbstractController
             $this->action();
         }
     }
-    
+
     protected function access(): bool
     {
         return $this->access;
     }
-    
-    protected function action() {}
+
+    protected function action()
+    {
+    }
 }
