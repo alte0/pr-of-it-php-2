@@ -32,10 +32,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/new/article/">Добавить новую новость</a>
+                        <a class="nav-link" href="/new/article/">Новая новость</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/delete/article/">Перейти к удалению новостей</a>
+                        <a class="nav-link" href="/delete/article/">Удалить новость</a>
                     </li>
                 </ul>
             </div>
