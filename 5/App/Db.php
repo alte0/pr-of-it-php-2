@@ -13,6 +13,9 @@ class Db
             $this->dbh = new \PDO('mysql:host=mysql-service;dbname=php2', 'root', '');
         } catch (\PDOException $e) {
             if ($e->getMessage()) {
+                \App\Logger::addLog(__CLASS__ . __METHOD__);
+                \App\Logger::addLog($e->getMessage());
+                \App\Logger::recordLog();
                 throw new \App\Exception\DbException('Ошибка базы данных');
             }
         }
@@ -33,8 +36,10 @@ class Db
             return (bool)$this->sth->rowCount();
         } catch (\PDOException $e) {
             if ($e->getMessage()) {
-                $dbException = new \App\Exception\DbException('Ошибка запроса к базе данных');
-                throw $dbException;
+                \App\Logger::addLog(__CLASS__ . __METHOD__);
+                \App\Logger::addLog($e->getMessage());
+                \App\Logger::recordLog();
+                throw new \App\Exception\DbException('Ошибка запроса к базе данных');
             }
         }
     }

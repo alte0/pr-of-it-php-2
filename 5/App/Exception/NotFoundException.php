@@ -13,5 +13,9 @@ class NotFoundException extends \Exception
         if (empty($message)) {
             $this->message = 'Ошибка 404 - не найдено';
         }
+
+        \App\Logger::addLog(__CLASS__ . __METHOD__);
+        \App\Logger::addLog($_SERVER['REQUEST_URI']);
+        \App\Logger::recordLog();
     }
 }
