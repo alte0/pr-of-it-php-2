@@ -1,5 +1,9 @@
 <?php
 
+use App\Exception\DbException as DbExceptionAlias;
+use App\Exception\ErrorsException as ErrorsExceptionAlias;
+use App\Exception\NotFoundException as NotFoundExceptionAlias;
+
 require_once __DIR__ . '/autoload.php';
 
 /* url адреса
@@ -32,9 +36,9 @@ try {
         $ctrl = new $className(true);
         $ctrl->dispatcher();
     } else {
-        throw new \App\Exception\NotFoundException();
+        throw new NotFoundExceptionAlias();
     }
-} catch (\App\Exception\DbException|\App\Exception\NotFoundException|\App\Exception\ErrorsException $e) {
+} catch (DbExceptionAlias|NotFoundExceptionAlias|ErrorsExceptionAlias $e) {
     $view = new \App\View();
     $layoutView = new \App\View();
 

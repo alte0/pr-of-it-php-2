@@ -13,7 +13,7 @@ class Db
             $this->dbh = new \PDO('mysql:host=mysql-service;dbname=php2', 'root', '');
         } catch (\PDOException $e) {
             if ($e->getMessage()) {
-                \App\Logger::addLog(__CLASS__ . __METHOD__);
+                \App\Logger::addLog(__CLASS__ . __METHOD__ . ' = ' . __FILE__);
                 \App\Logger::addLog($e->getMessage());
                 \App\Logger::recordLog();
                 throw new \App\Exception\DbException('Ошибка базы данных');
