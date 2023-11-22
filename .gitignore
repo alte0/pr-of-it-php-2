@@ -1,3 +1,4 @@
 # editors
 *.idea
 .docker/volume/db
+app/vendor
