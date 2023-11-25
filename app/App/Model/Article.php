@@ -77,28 +77,27 @@ class Article extends Model
     }
 
     /**
+     * @return false|Author
+     */
+    public function getAuthor(): false|\App\Model\Author
+    {
+        if ($this->author_id > 0) {
+            return Author::findById($this->author_id);
+        }
+
+        return new \App\Model\Author();
+    }
+
+    /**
      * @param string $name
      * @return bool|object
      */
     public function __get(string $name): bool|object
     {
-        if ($name === 'author' && $this->author_id > 0) {
-            return Author::findById($this->author_id);
+        if ($name === 'author') {
+            return $this->getAuthor();
         }
 
-        return false;
-    }
-
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public function __isset(string $name): bool
-    {
-        if ($name === 'author' && $this->author_id > 0) {
-            return isset($this->author);
-        }
-
-        return false;
+        return parent::__get($name);
     }
 }

@@ -2,12 +2,22 @@
 
 namespace App;
 
+use Twig\Environment;
+
 class View implements \Countable, \Iterator
 {
     use \App\SetAndGetDataTrait;
 
+    protected Environment $twig;
+
     public function __construct()
     {
+        $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
+        $this->twig = new Environment($loader, [
+            //'cache' => __DIR__ . '/../compilation_cache',
+            'cache' => false,
+            //'debug' => true,
+        ]);
     }
 
     /**
@@ -18,6 +28,9 @@ class View implements \Countable, \Iterator
         require_once $path . '.php';
     }
 
+    /**
+     * @deprecated
+     */
     public function render(string $path): string|bool
     {
         ob_start();
@@ -28,6 +41,13 @@ class View implements \Countable, \Iterator
         ob_end_clean();
 
         return $contents;
+    }
+
+    public function renderTwig(string $templateFileName, string $layoutFile = 'layout.twig'): string|bool
+    {
+        $layout = $this->twig->load($layoutFile);
+
+        return $this->twig->render($templateFileName, array_merge(['layout' => $layout], $this->data));
     }
 
     public function count(): int

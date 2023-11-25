@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Model\Article;
+
 class NewsArticleController extends AbstractController
 {
     protected function action(): void
@@ -14,14 +16,13 @@ class NewsArticleController extends AbstractController
             $id = intval($id);
         }
 
-        $article = \App\Model\Article::findById($id);
+        $article = Article::findById($id);
 
-        if (is_object($article)) {
+        if (Article::class === get_class($article)) {
             $this->view->article = $article;
-            $templateName = 'article';
-            $this->layoutView->title = $article->title;
-            $this->layoutView->content = $this->view->render(__DIR__ . '/../../templates/' . $templateName);
-            echo $this->layoutView->render(__DIR__ . '/../../templates/layout');
+            $this->view->pageTitle = $article->title;
+            $this->view->title = $article->title;
+            echo $this->view->renderTwig('article.twig');
         } else {
             throw new \App\Exception\NotFoundException();
         }

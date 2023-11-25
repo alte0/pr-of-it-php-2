@@ -6,7 +6,7 @@ class NewArticleController extends AbstractController
 {
     protected function action(): void
     {
-        $templateName = 'new_article';
+        $templateName = 'new_article.twig';
 
         if (
             $_SERVER['REQUEST_METHOD'] === 'POST'
@@ -21,16 +21,15 @@ class NewArticleController extends AbstractController
                 'new'
             );
             $article->save();
-            $templateName = 'new_article_success';
+            $templateName = 'new_article_success.twig';
         }
 
         $title = 'Добавить новую новость';
         $this->view->h3 = $title;
         $this->view->textSubmit = 'Добавить новость';
-        $this->view->autors = \App\Model\Author::findAll();
-        $this->layoutView->title = $title;
+        $this->view->authors = \App\Model\Author::findAll();
+        $this->view->pageTitle = $title;
 
-        $this->layoutView->content = $this->view->render(__DIR__ . '/../../templates/' . $templateName);
-        echo $this->layoutView->render(__DIR__ . '/../../templates/layout');
+        echo $this->view->renderTwig($templateName);
     }
 }

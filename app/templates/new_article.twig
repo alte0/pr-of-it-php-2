@@ -1,5 +1,8 @@
+{% extends layout %}
+
+{% block pageContent %}
 <div class="container">
-    <h3><?php echo $this->h3; ?></h3>
+    <h3>{{ h3 }}</h3>
     <form action="" method="POST">
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">Заголовок новости</label>
@@ -9,7 +12,7 @@
                     class="form-control"
                     id="exampleFormControlInput1"
                     placeholder="Заголовок новости"
-                    value="<?php echo $this->title; ?>"
+                    value="{{ title }}"
             >
         </div>
         <div class="mb-3">
@@ -20,19 +23,19 @@
                     id="exampleFormControlTextarea1"
                     rows="10"
                     placeholder="Текст новости"
-            ><?php echo $this->content; ?></textarea>
+            >{{ content }}</textarea>
         </div>
         <div class="mb-3">
             <label for="exampleFormControlSelect1" class="form-label">Автор новости</label>
             <select name="article[author]" class="form-select" id="exampleFormControlSelect1">
-                <?php foreach ($this->autors as $author) { ?>
+                {% for author in authors %}
                     <option
-                            value="<?php echo $author->id; ?>"
-                        <?php if (isset($this->author_id) && $this->author_id > 0 && $this->author_id == $author->id) { ?>
+                            value="{{ author.id }}"
+                            {% if author_id == author.id %}
                             selected
-                        <?php } ?>
-                    ><?php echo $author->fio; ?></option>
-                <?php } ?>
+                            {% endif %}
+                    >{{ author.fio }}</option>
+                {% endfor %}
             </select>
         </div>
         <div>
@@ -40,8 +43,9 @@
                     class="btn btn-danger"
                     type="submit"
             >
-                <?php echo $this->textSubmit; ?>
+                {{ textSubmit }}
             </button>
         </div>
     </form>
 </div>
+{% endblock %}

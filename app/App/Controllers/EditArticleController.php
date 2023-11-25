@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Model\Article;
+
 class EditArticleController extends AbstractController
 {
     protected function action(): void
@@ -17,7 +19,7 @@ class EditArticleController extends AbstractController
         if (
             $_SERVER['REQUEST_METHOD'] === 'POST'
         ) {
-            $article = new \App\Model\Article();
+            $article = new Article();
             $article->fill(
                 [
                     'id' => $id,
@@ -30,22 +32,18 @@ class EditArticleController extends AbstractController
             $article->save();
         }
 
-        $article = \App\Model\Article::findById($id);
+        $article = Article::findById($id);
 
-        if (is_object($article)) {
-            $templateName = 'edit_article';
-
+        if (get_class($article) == Article::class) {
             $this->view->h3 = 'Редактирование - ' . $article->title;
             $this->view->title = $article->title;
+            $this->view->pageTitle = $article->title;
             $this->view->content = $article->content;
             $this->view->author_id = $article->author_id;
             $this->view->textSubmit = 'Изменить новость';
-            $this->view->autors = \App\Model\Author::findAll();
+            $this->view->authors = \App\Model\Author::findAll();
 
-            $this->layoutView->title = 'Редактирование - ' . $article->title;
-
-            $this->layoutView->content = $this->view->render(__DIR__ . '/../../templates/' . $templateName);
-            echo $this->layoutView->render(__DIR__ . '/../../templates/layout');
+            echo $this->view->renderTwig('edit_article.twig');
         } else {
             throw new \App\Exception\NotFoundException();
         }

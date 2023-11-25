@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Model\Article;
+
 class DeleteArticleController extends AbstractController
 {
     protected function action(): void
@@ -16,7 +18,7 @@ class DeleteArticleController extends AbstractController
                 $_POST['articles']
             );
 
-            $article = new \App\Model\Article();
+            $article = new Article();
 
             foreach ($arrArticlesDel as $id) {
                 $article->fill(['id' => intval($id)], 'delete');
@@ -24,13 +26,12 @@ class DeleteArticleController extends AbstractController
             }
         }
 
-        $articles = \App\Model\Article::findAll();
+        $articles = Article::findAll();
 
         if (is_array($articles)) {
-            $templateName = 'del_article';
             $this->view->articles = $articles;
-            $this->layoutView->content = $this->view->render(__DIR__ . '/../../templates/' . $templateName);
-            echo $this->layoutView->render(__DIR__ . '/../../templates/layout');
+            $this->view->pageTitle = 'Удаление новостей';
+            echo $this->view->renderTwig('del_article.twig');
         } else {
             throw new \App\Exception\NotFoundException();
         }

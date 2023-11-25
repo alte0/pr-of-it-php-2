@@ -11,9 +11,8 @@ class IndexController extends AbstractController
         if (empty($this->view->articles)) {
             throw new \App\Exception\NotFoundException();
         } else {
-            $this->layoutView->title = 'Новости';
-            $this->layoutView->content = $this->view->render(__DIR__ . '/../../templates/index');
-            echo $this->layoutView->render(__DIR__ . '/../../templates/layout');
+            $this->view->pageTitle = 'Новости';
+            echo $this->view->renderTwig('index.twig');
         }
     }
 }
