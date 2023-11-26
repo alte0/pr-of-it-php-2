@@ -2,3 +2,5 @@
 *.idea
 .docker/volume/db
 app/vendor
+app/compilation_cache/
+app/logs
