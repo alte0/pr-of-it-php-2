@@ -28,6 +28,18 @@ abstract class Model
         );
     }
 
+
+    public static function findAllEach(): \Generator|\stdClass
+    {
+        $db = new \App\Db();
+
+        return $db->queryEach(
+            'SELECT * FROM ' . static::TABLE,
+            [],
+            static::class
+        );
+    }
+
     /** Получение данных по id
      * @param $id
      * @return object|false

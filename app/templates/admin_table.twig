@@ -1,0 +1,16 @@
+{% extends layout %}
+
+{% block pageContent %}
+<div class="table-responsive py-3">
+    <table class="table table-striped table-bordered mb-0">
+        {% for index, model in arModels %}
+        <tr>
+            <td>{{ model }}</td>
+            {% for fn in attribute(arFn, index) %}
+            <td>{{ fn }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

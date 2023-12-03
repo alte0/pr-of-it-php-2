@@ -14,6 +14,10 @@ $requestUri = '/edit/article/id8/';
 $requestUri = '/new/article/';
 $requestUri = '/';
 */
+
+/*foreach (\App\Model\Person::findAllEach() as $person) {
+    var_dump($person->name);
+}*/
 $requestUri = $_SERVER['REQUEST_URI'];
 
 if (isset($requestUri) && mb_strlen($requestUri) > 0) {

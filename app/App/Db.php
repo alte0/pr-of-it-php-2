@@ -27,6 +27,22 @@ class Db
         return $this->execute($sql, $params) ? $this->sth->fetchAll(\PDO::FETCH_CLASS, $class) : [];
     }
 
+
+    public function queryEach(string $sql, array $params = [], $class = \stdClass::class): \Generator|\stdClass
+    {
+        $this->sth = $this->dbh->prepare($sql);
+        $this->sth->setFetchMode(\PDO::FETCH_CLASS, $class);
+        $this->sth->execute($params);
+
+        if ($this->sth->rowCount()) {
+            while ($obj = $this->sth->fetch()) {
+                yield $obj;
+            }
+        } else {
+            return new \stdClass();
+        }
+    }
+
     public function execute(string $query, array $params = []): bool
     {
         try {
